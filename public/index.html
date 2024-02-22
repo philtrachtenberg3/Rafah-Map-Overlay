@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Region Overlay</title>
+    <style>
+        /* Styling for map container */
+        #map {
+            height: 500px; 
+            width: 800px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <input type="text" id="location-search" placeholder="Enter a location">
+    <button id="update-overlay">Update Overlay</button>  
+
+    <script>
+        function setupMap() {
+            // Fetch API key from backend
+            fetch('/api/key') 
+                .then(response => response.json())
+                .then(data => {
+                    const src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=places&callback=initMap`;
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                });
+        }
+     </script>
+    <script src="./map.js" defer></script> 
+</body>
+</html>

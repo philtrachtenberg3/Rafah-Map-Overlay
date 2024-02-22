@@ -1,0 +1,8 @@
+# Dependency Folder
+node_modules/
+
+# API Keys (Keep these secret!)
+.env
+
+# Local Development Files (optional)
+.vscode/
