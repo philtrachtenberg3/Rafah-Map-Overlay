@@ -35,11 +35,13 @@ function initMap(apiKey) {
     const searchInput = document.getElementById('location-search');
     const updateButton = document.getElementById('update-overlay');
     updateButton.addEventListener('click', () => {
+        console.log('update button clicked');
         updateOverlay(searchInput.value); 
     });
 
     // Overlay Update Logic
     function updateOverlay(location) {
+        console.log('update button clicked')
         const geocoder = new google.maps.Geocoder(); 
 
         geocoder.geocode({ address: location }, (results, status) => {
