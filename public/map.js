@@ -66,6 +66,4 @@ function initMap(apiKey) {
             }
         });
     }
-
-    setupMap(); // Call the function to load Google Maps 
 }

@@ -1,16 +1,21 @@
 const express = require('express');
 const path = require('path'); 
-require('dotenv').config(); 
+require('dotenv').config(); // Load environment variables at the top
 
 const app = express();
-const port = process.env.PORT || 3000; // Use environment variable for port
+const port = process.env.PORT || 3000; 
 
-// Serve your static files (HTML, CSS, your map JavaScript)
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint to fetch your Google Maps API key
+// Endpoint for Google Maps API key
 app.get('/api/key', (req, res) => {
     res.json({ apiKey: process.env.GOOGLE_MAPS_API_KEY });
+});
+
+// Route for the root path ('/')
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(port, () => {

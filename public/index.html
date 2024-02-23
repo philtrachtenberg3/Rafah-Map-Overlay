@@ -12,24 +12,35 @@
 </head>
 <body>
     <div id="map"></div>
-
+    
     <input type="text" id="location-search" placeholder="Enter a location">
     <button id="update-overlay">Update Overlay</button>  
-
+    
     <script>
-        function initMap() {
+        function loadGoogleMapsAPI() {
             // Fetch API key from backend
             fetch('/api/key') 
-                .then(response => response.json())
-                .then(data => {
-                    const src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=places&callback=initMap`;
-                    const script = document.createElement('script');
-                    script.src = src;
-                    script.async = true;
-                    script.defer = true;
-                    document.head.appendChild(script);
-                });
+            .then(response => response.json())
+            .then(data => {
+                const script = document.createElement('script');
+                // Insert the fetched API key into the URL
+                const src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=places&callback=initMap`;
+                script.src = src;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            })
+            .catch(error => console.error('Error loading the Google Maps API:', error));
         }
+
+        function initMap() {
+            // Initialization code for your map goes here
+            // This function is called once the Google Maps API script has been loaded and executed
+            console.log('Google Maps API has been loaded and is ready for use.');
+        }
+
+        // Call this function when you want to load the Google Maps API
+        loadGoogleMapsAPI();
     </script>
     <script src="./map.js" defer></script> 
 </body>
